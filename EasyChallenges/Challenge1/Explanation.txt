@@ -1,0 +1,152 @@
+1 Solution:
+
+array = [3, 5, -4, 8, 11, 1, -1, 6]
+targetSum = 10
+
+Here we can use two for loops. We can go through the each number individually and then each of the number traverce through the array and find the sum
+We can take the number 3 as array[0] and add each of the element to the array[0]. After take the next item in the array and check each the element for the second element. 
+But it’s not very optimal. It’s taking to much time. 
+
+2 Solution:
+
+array = [3, 5, -4, 8, 11, 1, -1, 6]
+targetSum = 10
+nums = {}
+
+We can use hash table nums. We can try to store every number in a hash table
+That will allow us to access each number in constant time through that hash table.
+
+targetSum = 10.
+When I am traversing the array at which of the number we stop we are gonna to check if the number which is needed to sum up to the target value is stored in the hash table.
+
+X - Current num (the number when we traverce the array)
+Y - the num which we have to find
+
+X + Y = targetSum
+
+or 
+
+Y = targetSum - X
+
+
+If our Y in hash table nums we can return x and y. We are travercing the array and we just need to make sure to store x in a hash table.
+
+1 step. Let’s start from array[0]
+
+Y = targetSum - array[0] = 10 -3 = 7
+
+7 is not in our hash table. We can store the elment "3:True" to nums.
+
+2 step. array[1]
+
+Y = targetSum - array[1] = 10 - 5 = 5
+
+5 is not in our hash table. We can store the elment "5:True" to nums.
+
+3 step. array[2]
+
+Y = targetSum - array[2] = 10 - (-4) = 14
+
+14 is not in our hash table. We can store the elment "-4:True" to nums.
+
+4 step. array[3]
+
+Y = targetSum - array[3] = 10 - 8 = 2
+
+2 is not in our hash table. We can store the elment "8:True" to nums.
+
+
+5 step. array[4]
+
+Y = targetSum - array[4] = 10 - 11 = -1
+
+-1 is not in our hash table. We can store the elment "11:True" to nums.
+
+
+5 step. array[5]
+
+Y = targetSum - array[5] = 10 - 1 = 9
+
+9 is not in our hash table. We can store the elment "1:True" to nums.
+
+6 step. array[6]
+
+Y = targetSum - array[5] = 10 - (-1) = 11 (Found on the step 5)
+
+11 is in our hash table. 
+
+Result = [-1, 11]
+
+The time complexity here is O(N)
+We are traversing our array ones and each number we are calculating. And we are accessing our data in hash table.
+In total time complexity is O(N)
+Space complexity is also O(N) and we are adding the value to hash table.
+
+3 Solution:
+
+We can first sort the array. If we sort the array sorting is taking O(logn) time
+And for space it will be O(1)
+
+We will set the first pointer to the 1 number in the array -> L = array[0]. 
+And the right pointer will be under the right element of the array -> R = array[len(array)-1].
+
+We will sum up L and R:
+
+array = [3, 5, -4, 8, 11, 1, -1, 6]
+array.sort() = [-4, -1, 1, 3, 5, 6, 8, 11]
+targetSum = 10
+
+
+1 Step:
+
+L + R = -4 + 11 = 7
+
+7 < 10
+
+Now we will try to move the left pointer to the right to try the greater sum.
+
+L = array[1]
+R = array[len(array)-1]
+
+L + R = -1 + 11 = 10 (That is equal to our targetSum)
+
+Let’s assume that we had target number 13.
+
+Then we can see that 10 < 13 so we have to move our pointer to the next element 
+
+L = array[2]
+R = array[len(array)-1]
+
+L + R = 1 + 11 = 12 
+
+12 < 13
+
+Let's move to the next element of the array.
+
+L = array[3]
+R = array[len(array)-1]
+
+L + R = 3 + 11 = 14 
+
+14 > 13
+
+We have to move right pointer to the left.
+
+L = array[3]
+R = array[len(array)-2]
+
+3 + 8 = 11 < 13
+
+We have to move left pointer to the right.
+
+L = array[4]
+R = array[len(array)-2]
+
+5 + 8 = 13 == 13
+
+We found the pair!
+
+Here we don’t use additional space. We have left pointer and right pointer.
+And in terms of time we run of in O(nlogn) that’s how long the actual sort algorithm could run.
+
+
